@@ -31,7 +31,7 @@ public class Lista {
 
     public Proceso sacar( Proceso proceso ) {
         
-        if ( this.primero != null ) {
+        if ( this.primero != null && this.primero.getProceso().equals(proceso) ) {
             Nodo temp = this.primero;
 
             this.primero = this.primero.getSiguiente();
