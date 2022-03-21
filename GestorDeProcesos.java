@@ -20,6 +20,11 @@ public class GestorDeProcesos {
         colaDeProcesos.insertar(p4);
 
         colaDeProcesos.listar();
+
+        colaDeProcesos.sacar(p4);
+
+        colaDeProcesos.listar();
+
     }
 
     public static void planificador() {
