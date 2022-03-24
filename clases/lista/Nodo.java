@@ -1,5 +1,6 @@
-package lista;
-import procesos.Proceso;
+package clases.lista;
+
+import clases.Proceso;
 
 public class Nodo {
     private Proceso proceso;
