@@ -19,6 +19,8 @@ public class Proceso {
         this.tiempoLlegada = tiempoLlegada;
         this._rafaga = rafaga;
         this._tiempoLlegada = tiempoLlegada;
+        this.tiempoEspera = 0;
+        this.tiempoTerminado = 0;
     }
 
     public int getId() {

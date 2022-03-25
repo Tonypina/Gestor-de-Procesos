@@ -1,4 +1,6 @@
 package clases.lista;
+import java.time.chrono.ThaiBuddhistChronology;
+
 import clases.Proceso;
 
 public class Lista {
@@ -33,10 +35,9 @@ public class Lista {
             return;
         }
 
-        Nodo temp = this.ultimo;
-        temp.setSiguiente(nuevoProceso);
-        temp.getAnterior().setSiguiente(temp);
-        nuevoProceso.setAnterior(temp);
+        this.ultimo.setSiguiente(nuevoProceso);
+        nuevoProceso.setAnterior(this.ultimo);
+        this.ultimo = nuevoProceso;
         length++;
     }
 
@@ -44,6 +45,15 @@ public class Lista {
         
         if ( this.primero != null ) {
             Nodo temp = this.primero;
+            
+            if ( this.primero.getSiguiente() == null ) {
+    
+                this.primero = null;
+                this.ultimo = null;
+                this.length--;
+    
+                return temp.getProceso();
+            }
 
             this.primero = this.primero.getSiguiente();
             this.primero.setAnterior( null );
@@ -55,31 +65,38 @@ public class Lista {
         return null;
     }
 
-    public Proceso peak( int index ) {
-        this.cursor = this.primero;
+    // public Proceso peak( int index ) {
+    //     this.cursor = this.primero;
 
-        if ( index > this.length) {
-            return null;
-        }
+    //     if ( index > this.length) {
+    //         return null;
+    //     }
+
+    //     for ( int i = 0; i < this.length; i++ ) {
+    //         if ( i == index ) {
+    //             return this.cursor.getProceso();
+    //         }
+    //         this.cursor = this.cursor.getSiguiente();
+    //     }
+
+    //     return null;
+    // }
+
+    public Proceso peak() {
+        return this.primero.getProceso();
+    }
+
+    public String listar() {
+
+        this.cursor = this.primero;
+        String cadena = ",";
 
         for ( int i = 0; i < this.length; i++ ) {
-            if ( i == index ) {
-                return this.cursor.getProceso();
-            }
+            cadena += this.cursor.getProceso().getNombre() + ", ";
             this.cursor = this.cursor.getSiguiente();
         }
 
-        return null;
-    }
-
-    public void listar() {
-
-        Nodo temp = this.primero;
-
-        while ( temp != null ) {
-            System.out.print( temp.getProceso().getNombre() + ", " );
-            temp = temp.getSiguiente();
-        }
+        return cadena;
     }
 
     public int getLength() {

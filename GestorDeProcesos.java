@@ -9,33 +9,36 @@ import clases.lista.*;
 public class GestorDeProcesos {
 
     static final int QUANTUM = 2;
-    static Memoria memoria;
-    static Lista colaDeProcesos;
-
-    public GestorDeProcesos() {
-        memoria = new Memoria(1024);
-        colaDeProcesos = new Lista();
-    }
+    static Memoria memoria = new Memoria(1024);
+    static Lista colaDeProcesos = new Lista();
 
     public static void main(String[] args) {
 
-        Proceso p1 = new Proceso( 1, "P1", 10, 15, 2 );
-        Proceso p2 = new Proceso( 2, "P2", 10, 15, 2 );
-        Proceso p3 = new Proceso( 3, "P3", 10, 15, 2 );
-        Proceso p4 = new Proceso( 4, "P4", 10, 15, 2 );
+        Proceso p1 = new Proceso( 1, "P1", 1, 10, 0 );
+        Proceso p2 = new Proceso( 2, "P2", 1, 4, 1 );
+        Proceso p3 = new Proceso( 3, "P3", 1, 5, 2 );
+        Proceso p4 = new Proceso( 4, "P4", 1, 3, 3 );
 
         colaDeProcesos.insertar(p1);
         colaDeProcesos.insertar(p2);
         colaDeProcesos.insertar(p3);
         colaDeProcesos.insertar(p4);
+
+        System.out.println(colaDeProcesos.getLength());
+
+        System.out.println("La cola de procesos empieza como: " + colaDeProcesos.listar());
+
+        planificadorMedianoPlazo();
+        planificador();
     }
 
     public static void planificadorMedianoPlazo() {
         // Carga en memoria los procesos que quepan
-        for ( int i = 0; i < colaDeProcesos.getLength(); i++ ) {
-            if ( !memoria.cargar(colaDeProcesos.sacar()) ){
-                break;
-            }
+        for ( int i = 0; i < colaDeProcesos.getLength()-1; i++ ) {
+            if ( colaDeProcesos.peak() != null || colaDeProcesos.peak().getTamano() < memoria.getTamano() ) {
+                memoria.cargar(colaDeProcesos.sacar());
+                memoria.getColaDeProcesosListos().listar();
+            } else { return; }
         }
     }
 
@@ -166,20 +169,20 @@ public class GestorDeProcesos {
         
         }
         
-        System.out.println("\n\n\nNombre\tTiempoEjecutado\tTiempoEspera");
+        // System.out.println("\n\n\nNombre\tTiempoEjecutado\tTiempoEspera");
         
-        int promtejec = 0,
-            promtespera = 0;
+        // int promtejec = 0,
+        //     promtespera = 0;
         
-        for (int i = 0; i < nombres.length; i++){
-            System.out.print(""+nombres[i]+"\t"+tterminado[i]+"\t"+tiempoespera[i]+"\n");
+        // for (int i = 0; i < nombres.length; i++){
+        //     System.out.print(""+nombres[i]+"\t"+tterminado[i]+"\t"+tiempoespera[i]+"\n");
             
-            promtejec = promtejec + tterminado[i];
-            promtespera = promtespera + tiempoespera[i];
-        }
+        //     promtejec = promtejec + tterminado[i];
+        //     promtespera = promtespera + tiempoespera[i];
+        // }
 
-        System.out.print("\n\nPromedio ejec"+(float)promtejec/nombres.length);
-        System.out.print("\nPromedio espera"+(float)promtespera/nombres.length);
-        System.out.print("\nNuestro diagrama de gant sería:"+gant);
+        // System.out.print("\n\nPromedio ejec"+(float)promtejec/nombres.length);
+        // System.out.print("\nPromedio espera"+(float)promtespera/nombres.length);
+        // System.out.print("\nNuestro diagrama de gant sería:"+gant);
     }
 }
