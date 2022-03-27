@@ -1,16 +1,27 @@
 package clases;
 
+/**
+ * Clase Proceso
+ */
 public class Proceso {
-    private int id;
-    private String nombre;
-    private int tamano;
-    private int _rafaga;
-    private int _tiempoLlegada;
-    private int rafaga;
-    private int tiempoLlegada;
-    private int tiempoTerminado;
-    private int tiempoEspera;
+    private int id;                 // Id del proceso.
+    private String nombre;          // Nombre del proceso.
+    private int tamano;             // Tamaño del proceso.
+    private int _rafaga;            // Tiempo de ráfaga variable del proceso.
+    private int _tiempoLlegada;     // Tiempo de llegada varianble del proceso.
+    private int rafaga;             // Tiempo de ráfaga original del proceso.
+    private int tiempoLlegada;      // Tiempo de llegada orignal del proceso.
+    private int tiempoTerminado;    // Tiempo de finalización del proceso.
+    private int tiempoEspera;       // Tiempo de espera del proceso.
 
+    /**
+     * Constructor
+     * @param id Recibe el id del proceso a crear.
+     * @param nombre Recibe el nombre del proceso a crear.
+     * @param tamano Recibe el tamaño del proceso a crear.
+     * @param rafaga Recibe la ráfaga del proceso a crear.
+     * @param tiempoLlegada Recibe el tiempo de llegada del proceso a crear.
+     */
     public Proceso( int id, String nombre, int tamano, int rafaga, int tiempoLlegada ) {
         this.id = id;
         this.nombre = nombre;
@@ -22,6 +33,12 @@ public class Proceso {
         this.tiempoEspera = 0;
         this.tiempoTerminado = 0;
     }
+
+    /**
+     * GETTERS
+     * 
+     * Obtienen el valor de los atributos respectivos.
+     */
 
     public int getId() {
         return id;
@@ -58,6 +75,12 @@ public class Proceso {
     public int getTiempoEspera() {
         return tiempoEspera;
     }
+
+    /**
+     * SETTERS
+     * 
+     * Asignan el valor del parámetro en el atributo respectivo.
+     */
 
     public void setId(int id) {
         this.id = id;
