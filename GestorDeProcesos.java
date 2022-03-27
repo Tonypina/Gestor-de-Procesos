@@ -1,4 +1,3 @@
-import java.net.NetPermission;
 import java.util.*;
 import clases.*;
 import clases.lista.*;
@@ -14,6 +13,11 @@ public class GestorDeProcesos {
 
     public static void main(String[] args) {
 
+        System.out.println("Menu");
+        Scanner sc = new Scanner(System.in);
+
+        String nombre = sc.nextLine();
+
         Proceso p1 = new Proceso( 1, "P1", 1, 10, 0 );
         Proceso p2 = new Proceso( 2, "P2", 1, 4, 1 );
         Proceso p3 = new Proceso( 3, "P3", 1, 5, 2 );
@@ -28,8 +32,11 @@ public class GestorDeProcesos {
 
         System.out.println("La cola de procesos empieza como: " + colaDeProcesos.listar());
 
+
         planificadorMedianoPlazo();
         planificador();
+
+        // Imprimir tiempos
     }
 
     public static void planificadorMedianoPlazo() {
@@ -37,7 +44,7 @@ public class GestorDeProcesos {
         for ( int i = 0; i < colaDeProcesos.getLength()-1; i++ ) {
             if ( colaDeProcesos.peak() != null || colaDeProcesos.peak().getTamano() < memoria.getTamano() ) {
                 memoria.cargar(colaDeProcesos.sacar());
-                memoria.getColaDeProcesosListos().listar();
+                // System.out.println(memoria.getColaDeProcesosListos().listar());
             } else { return; }
         }
     }
