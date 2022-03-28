@@ -89,6 +89,20 @@ public class Lista {
         return this.primero.getProceso();
     }
 
+    public Proceso peak( int index ) {
+        this.cursor = this.primero;
+
+        if ( this.cursor == null || this.length < index ) {
+            return null;
+        }
+
+        for ( int i = 0; i < index; i++ ) {
+            this.cursor = this.cursor.getSiguiente();
+        }
+
+        return this.cursor.getProceso();
+    }
+
     /**
      * Método listar.
      * @brief Lista todos los nombres de los procesos en orden en una cadena.
