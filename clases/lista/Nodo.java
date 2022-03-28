@@ -9,6 +9,7 @@ public class Nodo {
     private Proceso proceso;    // Proceso que se almacenará.
     private Nodo siguiente;     // Apuntador al nodo siguiente.
     private Nodo anterior;      // Apuntador al nodo anterior.
+    private int index;
 
     /**
      * Constructor
@@ -50,6 +51,10 @@ public class Nodo {
         return siguiente;
     }
 
+    public int getIndex() {
+        return index;
+    }
+
     /**
      * SETTERS
      * 
@@ -65,5 +70,9 @@ public class Nodo {
 
     public void setAnterior(Nodo anterior) {
         this.anterior = anterior;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
     }
 }

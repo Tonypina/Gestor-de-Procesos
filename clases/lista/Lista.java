@@ -30,6 +30,7 @@ public class Lista {
         
         if ( this.primero == null ) {
             
+            nuevoProceso.setIndex(0);
             this.primero = nuevoProceso;
             this.ultimo = nuevoProceso;
             this.length++;
@@ -37,16 +38,18 @@ public class Lista {
         } 
         
         if ( this.primero.equals(this.ultimo) ) {
-
+            
             this.primero.setSiguiente(nuevoProceso);
             nuevoProceso.setAnterior(this.primero);
+            nuevoProceso.setIndex(1);
             this.ultimo = nuevoProceso;
             this.length++;
             return;
         }
-
+        
         this.ultimo.setSiguiente(nuevoProceso);
         nuevoProceso.setAnterior(this.ultimo);
+        nuevoProceso.setIndex(this.ultimo.getIndex() + 1);
         this.ultimo = nuevoProceso;
         length++;
     }
@@ -70,6 +73,12 @@ public class Lista {
                 return temp.getProceso();
             }
 
+            this.cursor = this.primero;
+            for ( int i = 0; i < this.length-1; i++ ) {
+                this.cursor.getSiguiente().setIndex(this.cursor.getIndex());;
+                this.cursor = this.cursor.getSiguiente();
+            }
+
             this.primero = this.primero.getSiguiente();
             this.primero.setAnterior( null );
             this.length--;
@@ -80,6 +89,31 @@ public class Lista {
         return null;
     }
 
+    // public Proceso sacar( int index ) {
+    //     this.cursor = this.primero;
+
+    //     if ( this.cursor == null || this.length < index ) {
+    //         return null;
+    //     }
+
+    //     for ( int i = 0; i < index; i++ ) {
+    //         this.cursor = this.cursor.getSiguiente();
+    //     }
+
+    //     Nodo tempAnt = this.cursor.getAnterior();
+    //     Nodo tempSig = this.cursor.getSiguiente();
+
+    //     tempAnt.setSiguiente(tempSig);
+    //     tempSig.setAnterior(tempAnt);
+        
+    //     tempAnt.getAnterior().setSiguiente(tempAnt);
+    //     tempSig.getSiguiente().setAnterior(tempSig);
+
+    //     this.length--;
+
+    //     return this.cursor.getProceso();
+    // }
+
     /**
      * Método peak.
      * @brief Obtiene los datos del procesos que esté hasta enfrente sin sacarlo de la lista.
@@ -89,19 +123,27 @@ public class Lista {
         return this.primero.getProceso();
     }
 
-    public Proceso peak( int index ) {
-        this.cursor = this.primero;
+    // public Proceso peak( int index ) {
+    //     this.cursor = this.primero;
+    
+    //     if ( this.cursor == null || this.length <= index ) {
+    //         return null;
+    //     }
+        
+    //     for ( int i = 0; i < this.length; i++ ) {
+            
+    //         if ( this.cursor.getIndex() == index ) {
+    //             System.out.println("El indice es: " + this.cursor.getIndex() + " y es igual a: " + index);
+    //             return this.cursor.getProceso();
+    //         }
 
-        if ( this.cursor == null || this.length < index ) {
-            return null;
-        }
-
-        for ( int i = 0; i < index; i++ ) {
-            this.cursor = this.cursor.getSiguiente();
-        }
-
-        return this.cursor.getProceso();
-    }
+    //         System.out.println("El indice del siguiente es: " + this.cursor.getSiguiente().getIndex());
+    //         this.cursor = this.cursor.getSiguiente();
+    //         System.out.println("El indice se actualiza a: " + this.cursor.getIndex());
+    //     }
+            
+    //     return null;
+    // }
 
     /**
      * Método listar.
@@ -111,7 +153,7 @@ public class Lista {
     public String listar() {
 
         this.cursor = this.primero;
-        String cadena = ",";
+        String cadena = "";
 
         for ( int i = 0; i < this.length; i++ ) {
             cadena += this.cursor.getProceso().getNombre() + ", ";
