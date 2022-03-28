@@ -89,31 +89,6 @@ public class Lista {
         return null;
     }
 
-    // public Proceso sacar( int index ) {
-    //     this.cursor = this.primero;
-
-    //     if ( this.cursor == null || this.length < index ) {
-    //         return null;
-    //     }
-
-    //     for ( int i = 0; i < index; i++ ) {
-    //         this.cursor = this.cursor.getSiguiente();
-    //     }
-
-    //     Nodo tempAnt = this.cursor.getAnterior();
-    //     Nodo tempSig = this.cursor.getSiguiente();
-
-    //     tempAnt.setSiguiente(tempSig);
-    //     tempSig.setAnterior(tempAnt);
-        
-    //     tempAnt.getAnterior().setSiguiente(tempAnt);
-    //     tempSig.getSiguiente().setAnterior(tempSig);
-
-    //     this.length--;
-
-    //     return this.cursor.getProceso();
-    // }
-
     /**
      * Método peak.
      * @brief Obtiene los datos del procesos que esté hasta enfrente sin sacarlo de la lista.
@@ -122,28 +97,6 @@ public class Lista {
     public Proceso peak() {
         return this.primero.getProceso();
     }
-
-    // public Proceso peak( int index ) {
-    //     this.cursor = this.primero;
-    
-    //     if ( this.cursor == null || this.length <= index ) {
-    //         return null;
-    //     }
-        
-    //     for ( int i = 0; i < this.length; i++ ) {
-            
-    //         if ( this.cursor.getIndex() == index ) {
-    //             System.out.println("El indice es: " + this.cursor.getIndex() + " y es igual a: " + index);
-    //             return this.cursor.getProceso();
-    //         }
-
-    //         System.out.println("El indice del siguiente es: " + this.cursor.getSiguiente().getIndex());
-    //         this.cursor = this.cursor.getSiguiente();
-    //         System.out.println("El indice se actualiza a: " + this.cursor.getIndex());
-    //     }
-            
-    //     return null;
-    // }
 
     /**
      * Método listar.
@@ -164,11 +117,76 @@ public class Lista {
     }
 
     /**
-     * Método length.
+     * Método merge_sort
+     * 
+     * @brief Ordena la lista por tiempo de llegada de los procesos
+     * @return Regresa la lista ordenada.
+     */
+    public Lista merge_sort(){
+
+        this.cursor = this.primero;
+
+        // Caso base
+        if ( this.length <= 1 )    
+            return this;
+
+        // Caso recursivo
+        Lista izq = new Lista();
+        Lista der = new Lista();
+
+        for ( int i = 0; i < this.length; i++ ) {
+            
+            if ( i < (this.length)/2 )
+                izq.insertar(this.cursor.getProceso());
+            
+            else
+                der.insertar(this.cursor.getProceso());
+
+            this.cursor = this.cursor.getSiguiente();
+        }
+
+        izq = izq.merge_sort();
+        der = der.merge_sort();
+
+        return merge( izq, der );
+    }
+
+    private Lista merge( Lista izq, Lista der ) {
+        Lista resultado = new Lista();
+
+        while ( izq.getLength() > 0 && der.getLength() > 0 ) {
+            if ( izq.getPrimero().getProceso().getTiempoLlegada() <= der.getPrimero().getProceso().getTiempoLlegada() )
+                resultado.insertar( izq.sacar() );
+            else
+                resultado.insertar( der.sacar() );
+        }
+
+        while ( izq.getLength() > 0 ) {
+            resultado.insertar( izq.sacar() );
+        }
+
+        while ( der.getLength() > 0 ) {
+            resultado.insertar( der.sacar() );
+        }
+
+        return resultado;
+    }
+
+    /**
+     * Método getLength.
      * @brief Getter del atributo length.
      * @return Regresa el tamaño actual de la lista.
      */
     public int getLength() {
         return length;
+    }
+
+    /**
+     * Método getPrimero
+     * @brief Getter del primer nodo de la lista.
+     * @return Regresa el primer nodo de la lista.
+     */
+    public Nodo getPrimero() {
+        return primero;
     }
 }

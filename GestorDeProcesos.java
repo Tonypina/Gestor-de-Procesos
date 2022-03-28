@@ -14,6 +14,9 @@ public class GestorDeProcesos {
     static Memoria memoria = new Memoria(1024);
     static Lista colaDeProcesos = new Lista();
 
+    /**
+     * Main de prueba.
+     */
     public static void main(String[] args) {
 
         // System.out.println("Menu");
@@ -31,10 +34,14 @@ public class GestorDeProcesos {
         colaDeProcesos.insertar(p3);
         colaDeProcesos.insertar(p4);
 
-        System.out.println(colaDeProcesos.getLength());
-
         System.out.println("La cola de procesos empieza como: " + colaDeProcesos.listar());
 
+        /**
+         * Para el correcto funcionamiento del algoritmo, al inicio debemos
+         * ordenar los procesos por su tiempo de llegada.
+         * */ 
+        colaDeProcesos = colaDeProcesos.merge_sort();
+        System.out.println("Después de ordenar la lista: " + colaDeProcesos.listar());
 
         planificadorMedianoPlazo();
         planificadorCortoPlazo();
@@ -42,14 +49,23 @@ public class GestorDeProcesos {
         System.out.println("El diagrama de gant final es: " + gant);
     }
 
+    /**
+     * Main real.
+     */
     // public static void main(String[] args) {
     //     System.out.println(colaDeProcesos.getLength());
         
     //     inicio();
     //     lectura();
     //     System.out.println("La cola de procesos empieza como: " + colaDeProcesos.listar());
+        
+    //     colaDeProcesos = colaDeProcesos.merge_sort();
+    //     System.out.println("Después de ordenar la lista: " + colaDeProcesos.listar());
+
     //     planificadorMedianoPlazo();
-    //     planificador();
+    //     planificadorCortoPlazo();
+
+    //     System.out.println("El diagrama de gant final es: " + gant);
 
     //     // Imprimir tiempos
     // }
@@ -85,7 +101,8 @@ public class GestorDeProcesos {
         }
         System.out.print("\033[H\033[2J");
         System.out.flush();
-      
+
+        entrada.close();
     }
     
     public static void inicio(){
@@ -101,6 +118,8 @@ public class GestorDeProcesos {
         {}
         System.out.print("\033[H\033[2J");
         System.out.flush();
+
+        teclado.close();
     }
 
     public static void imprimir(){
@@ -109,6 +128,9 @@ public class GestorDeProcesos {
         System.out.print("=======================================\n");
     }
 
+    /**
+     * Planificador de memoria.
+     */
     public static void planificadorMedianoPlazo() {
 
         int tamanoDeLaCola = colaDeProcesos.getLength();
