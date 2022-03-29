@@ -51,7 +51,7 @@ public class Lista {
         nuevoProceso.setAnterior(this.ultimo);
         nuevoProceso.setIndex(this.ultimo.getIndex() + 1);
         this.ultimo = nuevoProceso;
-        length++;
+        this.length++;
     }
 
     /**

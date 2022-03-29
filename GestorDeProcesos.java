@@ -24,10 +24,10 @@ public class GestorDeProcesos {
 
         // String nombre = sc.nextLine();
 
-        Proceso p1 = new Proceso( 1, "P1", 1, 10, 0 );
-        Proceso p2 = new Proceso( 2, "P2", 1, 4, 1 );
-        Proceso p3 = new Proceso( 3, "P3", 1, 5, 2 );
-        Proceso p4 = new Proceso( 4, "P4", 1, 3, 3 );
+        Proceso p1 = new Proceso( 1, "P1", 1, 10, 3 );
+        Proceso p2 = new Proceso( 2, "P2", 1, 4, 0 );
+        Proceso p3 = new Proceso( 3, "P3", 1, 5, 1 );
+        Proceso p4 = new Proceso( 4, "P4", 1, 3, 2 );
 
         colaDeProcesos.insertar(p1);
         colaDeProcesos.insertar(p2);
@@ -74,10 +74,12 @@ public class GestorDeProcesos {
         
         imprimir();
         
-        Scanner entrada = new Scanner (System.in);
+        int n;
+
+        Scanner entrada = new Scanner(System.in);
         System.out.print("Cuántos procesos desea crear?\n");
 
-        int n=entrada.nextInt();
+        n = entrada.nextInt();
         
         Proceso proceso[] = new Proceso[n];
         int id=1;
@@ -119,7 +121,7 @@ public class GestorDeProcesos {
         System.out.print("\033[H\033[2J");
         System.out.flush();
 
-        teclado.close();
+        // teclado.close();
     }
 
     public static void imprimir(){
@@ -137,7 +139,6 @@ public class GestorDeProcesos {
 
         for ( int i = 0; i < tamanoDeLaCola ; i++ ) {
             
-            // Proceso peak = colaDeProcesos.peak(i);
             if ( colaDeProcesos.peak() != null && colaDeProcesos.peak().getTamano() < memoria.getTamano() ) { // Si hay algo que cargar y hay espacio
                 
                 if ( colaDeProcesos.peak().getTiempoLlegada() <= tiempo ) {    // Si ya llegó el proceso, lo carga a memoria.
@@ -145,6 +146,7 @@ public class GestorDeProcesos {
                     System.out.println("Cargando en memoria: " + colaDeProcesos.peak().getNombre());
                     memoria.cargar(colaDeProcesos.sacar());
                     System.out.println("Se actualizo la memoria: " + memoria.getColaDeProcesosListos().listar());
+                    System.out.println("El tamaño actual de la memoria es: " + memoria.getTamano());
                     
                 } else {  // Si no ha llegado, lo vuelve a formar.
                     
