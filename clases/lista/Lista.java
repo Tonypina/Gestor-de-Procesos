@@ -189,4 +189,12 @@ public class Lista {
     public Nodo getPrimero() {
         return primero;
     }
+
+    public Nodo getCursor() {
+        return cursor;
+    }
+
+    public void setCursor(Nodo cursor) {
+        this.cursor = cursor;
+    }
 }

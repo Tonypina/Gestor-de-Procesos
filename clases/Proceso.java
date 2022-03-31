@@ -13,6 +13,9 @@ public class Proceso {
     private int tiempoLlegada;      // Tiempo de llegada orignal del proceso.
     private int tiempoTerminado;    // Tiempo de finalización del proceso.
     private int tiempoEspera;       // Tiempo de espera del proceso.
+    private int tiempocarga;
+    private int tiemposalida;
+    private int tejecutado;
 
     /**
      * Constructor
@@ -32,12 +35,16 @@ public class Proceso {
         this._tiempoLlegada = tiempoLlegada;
         this.tiempoEspera = 0;
         this.tiempoTerminado = 0;
+        this.tiempocarga=0;
+        this.tiemposalida=0;
+        this.tejecutado=0;
     }
 
     /**
      * GETTERS
      * 
      * Obtienen el valor de los atributos respectivos.
+     * @return 
      */
 
     public int getId() {
@@ -76,6 +83,18 @@ public class Proceso {
         return tiempoEspera;
     }
 
+    public int getTiempoCarga(){
+        return tiempocarga;
+    }
+    
+    public int getTiempoSalida(){
+        return tiemposalida;
+    }
+    
+    public int getTiempoEjecutado(){
+        return tejecutado;
+    }
+    
     /**
      * SETTERS
      * 
@@ -108,5 +127,16 @@ public class Proceso {
 
     public void setTiempoEspera(int tiempoEspera) {
         this.tiempoEspera = tiempoEspera;
+    }
+    
+    public void setTiempoCarga(int tiempocarga){
+        this.tiempocarga=tiempocarga;
+    }
+    public void setTiempoSalida(int tiemposalida){
+        this.tiemposalida=tiemposalida;
+    }
+    
+    public void setTiempoEjecutado(int tejecutado){
+        this.tejecutado=this.tejecutado+tejecutado;
     }
 }
