@@ -190,10 +190,18 @@ public class Lista {
         return primero;
     }
 
+    /**
+     * Método getCursor
+     * @return regresa el nodo al que apunta cursor
+     */
     public Nodo getCursor() {
         return cursor;
     }
 
+    /**
+     * Método setCursor
+     * @param cursor
+     */
     public void setCursor(Nodo cursor) {
         this.cursor = cursor;
     }
