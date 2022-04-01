@@ -4,15 +4,15 @@ package clases;
  * Clase Proceso
  */
 public class Proceso {
-    private int id;                 // Id del proceso.
-    private String nombre;          // Nombre del proceso.
-    private int tamano;             // Tamaño del proceso.
-    private int _rafaga;            // Tiempo de ráfaga variable del proceso.
-    private int _tiempoLlegada;     // Tiempo de llegada varianble del proceso.
-    private int rafaga;             // Tiempo de ráfaga original del proceso.
-    private int tiempoLlegada;      // Tiempo de llegada orignal del proceso.
-    private int tiempoTerminado;    // Tiempo de finalización del proceso.
-    private int tiempoEspera;       // Tiempo de espera del proceso.
+    private int id;                 
+    private String nombre;          
+    private int tamano;             
+    private int _rafaga;            
+    private int _tiempoLlegada;     
+    private int rafaga;             
+    private int tiempoLlegada;      
+    private int tiempoTerminado;    
+    private int tiempoEspera;       
     private int tiempocarga;
     private int tiemposalida;
     private int tejecutado;

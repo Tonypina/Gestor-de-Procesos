@@ -5,8 +5,8 @@ import clases.lista.*;
  * Clase Memoria
  */
 public class Memoria {
-    private Lista colaDeProcesosListos;     // Lista de los procesos que están listos para cargarse a CPU.
-    private long tamano;                    // Tamaño disponible en memoria.
+    private Lista colaDeProcesosListos;     
+    private long tamano;                    
 
     /**
      * Constructor.
@@ -42,13 +42,13 @@ public class Memoria {
      */
     public boolean cargar( Proceso proceso ) {
         
-        if ( this.tamano > proceso.getTamano() ) {          // Si hay suficiente tamaño.
-            this.colaDeProcesosListos.insertar(proceso);    // Forma el proceso en la cola.
-            this.tamano -= proceso.getTamano();             // Actualiza el tamaño disponible de la memoria.
+        if ( this.tamano > proceso.getTamano() ) {          
+            this.colaDeProcesosListos.insertar(proceso);    
+            this.tamano -= proceso.getTamano();             
             
-            return true;                                    // Sí se logró insertar.
+            return true;                                    
         }
-        return false;                                       // No se logró insertar.
+        return false;                                       
     }
 
     /**
@@ -58,12 +58,12 @@ public class Memoria {
      */
     public Proceso sacar() {
  
-        if ( this.colaDeProcesosListos.getLength() > 0 ) {          // Si NO está vacía la memoria.
-            Proceso proceso = this.colaDeProcesosListos.sacar();    // Saca el proceso que esté hasta delante.
-            this.tamano += proceso.getTamano();                     // Actualiza el tamaño pues se liberó memoria.
+        if ( this.colaDeProcesosListos.getLength() > 0 ) {          
+            Proceso proceso = this.colaDeProcesosListos.sacar();    
+            this.tamano += proceso.getTamano();                     
 
-            return proceso;                                         // Regresa el proceso que salió de memoria.
+            return proceso;                                         
         }
-        return null;                                                // No se pudo sacar de memoria porque está vacía, regresa null.
+        return null;                                                
     }
 }

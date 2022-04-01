@@ -6,10 +6,10 @@ import clases.Proceso;
  * Clase Lista
  */
 public class Lista {
-    private Nodo primero;   // Apuntador al primer nodo de la lista.
-    private Nodo ultimo;    // Apuntador al último nodo de la lista.
-    private Nodo cursor;    // Apuntador dinámico de nodos.
-    private int length;     // Tamaño de la lista.
+    private Nodo primero;   
+    private Nodo ultimo;    
+    private Nodo cursor;    
+    private int length;     
 
     /**
      * Constructor de Lista

@@ -6,9 +6,9 @@ import clases.Proceso;
  * Clase Nodo.
  */
 public class Nodo {
-    private Proceso proceso;    // Proceso que se almacenará.
-    private Nodo siguiente;     // Apuntador al nodo siguiente.
-    private Nodo anterior;      // Apuntador al nodo anterior.
+    private Proceso proceso;    
+    private Nodo siguiente;     
+    private Nodo anterior;      
     private int index;
 
     /**
