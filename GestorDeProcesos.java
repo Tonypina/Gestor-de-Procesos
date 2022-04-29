@@ -13,48 +13,45 @@ public class GestorDeProcesos {
 
     static Memoria memoria = new Memoria(1024);
     static Lista colaDeProcesos = new Lista();
-    static Lista ProcFin=new Lista();
+    static Lista ProcFin = new Lista();
 
     /**
      * Main de prueba.
-     * 
      */
-    
-    //Main de Pruebas 
-    /**
-     
-    
      public static void main(String[] args) {
 
-        Proceso p1 = new Proceso( 1, "P1", 1, 10, 0 );
-        Proceso p2 = new Proceso( 2, "P2", 1, 4, 1 );
-        Proceso p3 = new Proceso( 3, "P3", 1, 5, 2 );
-        Proceso p4 = new Proceso( 4, "P4", 1, 3, 3 );
+        Proceso p1 = new Proceso( 1, "A", 250, 4, 1 );
+        Proceso p2 = new Proceso( 2, "B", 400, 8, 2 );
+        Proceso p3 = new Proceso( 3, "C", 200, 2, 3 );
+        Proceso p4 = new Proceso( 4, "D", 400, 4, 5 );
+        Proceso p5 = new Proceso( 5, "E", 100, 5, 8 );
+        Proceso p6 = new Proceso( 6, "F", 600, 1, 22 );
 
         colaDeProcesos.insertar(p1);
         colaDeProcesos.insertar(p2);
         colaDeProcesos.insertar(p3);
         colaDeProcesos.insertar(p4);
+        colaDeProcesos.insertar(p5);
+        colaDeProcesos.insertar(p6);
 
         System.out.println("La cola de procesos empieza como: " + colaDeProcesos.listar());
-        int tamano = colaDeProcesos.getLength();
-        
 
         colaDeProcesos = colaDeProcesos.merge_sort();
         System.out.println("Después de ordenar la lista: " + colaDeProcesos.listar());
+        tiempo = colaDeProcesos.peak().getTiempoLlegada();
 
         planificadorMedianoPlazo();
         planificadorCortoPlazo();
 
         System.out.println("El diagrama de gant final es: " + gant);
         
-        promedios(tamano);
+        promedios();
     }
-    * */ 
 
     /**
      * Main real.
      */
+    /*
     public static void main(String[] args) {
          System.out.println(colaDeProcesos.getLength());
         
@@ -64,10 +61,8 @@ public class GestorDeProcesos {
         int tamano = colaDeProcesos.getLength();
         
 
-        /**
-         * Para el correcto funcionamiento del algoritmo, al inicio debemos
-         * ordenar los procesos por su tiempo de llegada.
-         * */ 
+        // Para el correcto funcionamiento del algoritmo, al inicio debemos
+        // ordenar los procesos por su tiempo de llegada.
         colaDeProcesos = colaDeProcesos.merge_sort();
         System.out.println("Después de ordenar la lista: " + colaDeProcesos.listar());
 
@@ -78,6 +73,8 @@ public class GestorDeProcesos {
         
         promedios(tamano);
      }
+
+    */
 
     public static void lectura(){
         
@@ -150,11 +147,11 @@ public class GestorDeProcesos {
     public static void planificadorMedianoPlazo() {
 
         int tamanoDeLaCola = colaDeProcesos.getLength();
-
+        
         for ( int i = 0; i < tamanoDeLaCola ; i++ ) {
-            
+
             if ( colaDeProcesos.peak() != null && colaDeProcesos.peak().getTamano() < memoria.getTamano() ) { 
-                
+
                 if ( colaDeProcesos.peak().getTiempoLlegada() <= tiempo ) {    
                     
                     System.out.println("Cargando en memoria: " + colaDeProcesos.peak().getNombre());
@@ -163,10 +160,9 @@ public class GestorDeProcesos {
                     System.out.println("El tamaño actual de la memoria es: " + memoria.getTamano());
                     
                 } else {
-                    
+
                     colaDeProcesos.insertar(colaDeProcesos.sacar());
                     System.out.println("Se actualizo la cola de procesos: " + colaDeProcesos.listar());
-
                 }
             
             } else { return; } 
@@ -185,7 +181,6 @@ public class GestorDeProcesos {
             boolean bandera = true;
 
             for (int i = 0; i < memoria.getColaDeProcesosListos().getLength(); i++){
-                
                 System.out.println("Tiempo actual: " + tiempo);
 
                 System.out.print("\nNuestro diagrama de gant seria:"+gant+"\n");
@@ -370,7 +365,7 @@ public class GestorDeProcesos {
      * @brief Realiza el proceso de obtener los promedios despues de que se obtuvieron los tiempos necesarios en el planificador de corto plaza.
      
      */
-    public static void promedios(int tamano){
+    public static void promedios(){
 
         float tresp = 0,
               tesp = 0,
@@ -380,10 +375,12 @@ public class GestorDeProcesos {
               salida,
               tllegada;
 
+        System.out.println("La cola con los tiempos finales es: "+ProcFin.listar());
+
         ProcFin = ProcFin.merge_sort();
         ProcFin.setCursor( ProcFin.getPrimero() );
         
-        for(int i = 0; i < tamano; i++){
+        for(int i = 0; i < ProcFin.getLength(); i++){
 
             carga = ProcFin.getCursor().getProceso().getTiempoCarga();
             ejec = ProcFin.getCursor().getProceso().getTiempoEjecutado();
@@ -400,9 +397,9 @@ public class GestorDeProcesos {
             ProcFin.setCursor(ProcFin.getCursor().getSiguiente());    
         }
 
-        tresp = (tresp / tamano);
-        tejec = (tejec/tamano);
-        tesp = (tesp/tamano);
+        tresp = (tresp / ProcFin.getLength());
+        tejec = (tejec/ProcFin.getLength());
+        tesp = (tesp/ProcFin.getLength());
         
         System.out.print("\n El tiempo promedio de espera es: " + tesp + "\n El tiempo de ejecución promedio es: "+tejec+"\n El tiempo respuesta es: "+tresp+"\n");
 
